@@ -1,14 +1,5 @@
 package com.codecool.models;
 
-import com.codecool.IO;
-import com.codecool.dao.BasketDao;
-import com.codecool.dao.OrdersDao;
-import com.codecool.dao.ProductDao;
-import com.jakewharton.fliptables.FlipTable;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
     private int id;
     private String name;
@@ -17,7 +8,7 @@ public class User {
     private int phoneNumber;
     private int role;
 
-    public User(int id, String name, String password, String email, int phoneNumber, int role) throws SQLException {
+    public User(int id, String name, String password, String email, int phoneNumber, int role) {
         this.id = id;
         this.name = name;
         this.password = password;
