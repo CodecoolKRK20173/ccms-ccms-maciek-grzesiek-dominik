@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class MenuHandler {
     public boolean isRunning;
-    private Map<Integer, Runnable> mainMenu;
+    private Map<Integer, Runnable> mainMEmployeeDao;
     private String[] mainMenuList;
     private final UI ui;
     private final IO io;
@@ -35,7 +35,6 @@ public class MenuHandler {
 
     private void initializeDao(){
         this.adminDao = new AdminDao();
-        this.employeeDao = new EmployeeDao();
         this.mentorDao = new MentorDao();
         this.studentDao = new StudentDao();
         this.userDao = new UserDao();
@@ -104,7 +103,7 @@ public class MenuHandler {
 
     private void initializeEmployeeMenu(User user) {
         employeeMenu = new HashMap<>();
-//        employeeMenu.put(1, user::getStudentsDetailsList);
+//        employeeMenu.put(1, EmployeeDao::getStudentsDetailsList);
         employeeMenu.put(2, this::isLogin);
     }
 
