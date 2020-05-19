@@ -12,7 +12,7 @@ public class UI {
 
     public void displayMainMenu(){
         clearScreen();
-        System.out.println("WELCOME TO ONLINE SHOP!");
+        System.out.println("WELCOME TO CODECOOL!");
         System.out.println("MAIN MENU: ");
     }
 
@@ -29,41 +29,66 @@ public class UI {
         adminMenu.forEach((k,v) -> System.out.println(k+". "+v));
     }
 
-    public void displayCustomerMenu(){
+    public void displayEmployeeMenu(){
         clearScreen();
-        Map<Integer, String> customerMenu = makeCustomerChoiceMap();
-        System.out.println("Customer MENU: ");
-        customerMenu.forEach((k,v) -> System.out.println(k+". "+v));
+        Map<Integer, String> employeeMenu = makeEmployeeChoiceMap();
+        System.out.println("Employee MENU: ");
+        employeeMenu.forEach((k,v) -> System.out.println(k+". "+v));
     }
 
-    private Map<Integer, String> makeCustomerChoiceMap() {
+    public void displayMentorMenu(){
+        clearScreen();
+        Map<Integer, String> mentorMenu = makeMentorChoiceMap();
+        System.out.println("Mentor MENU: ");
+        mentorMenu.forEach((k,v) -> System.out.println(k+". "+v));
+    }
+
+    public void displayStudentMenu(){
+        clearScreen();
+        Map<Integer, String> studentMenu = makeStudentChoiceMap();
+        System.out.println("Student MENU: ");
+        studentMenu.forEach((k,v) -> System.out.println(k+". "+v));
+    }
+
+    private Map<Integer, String> makeStudentChoiceMap(){
+        clearScreen();
+        Map<Integer, String> studentChoiceMap = new HashMap<>();
+        studentChoiceMap.put(1, "Submit an assignment");
+        studentChoiceMap.put(2, "Show my grades");
+        studentChoiceMap.put(3, "Logout");
+        return studentChoiceMap;
+    }
+
+    private Map<Integer, String> makeMentorChoiceMap() {
+        Map<Integer, String > mentorChoiceMap = new HashMap<>();
+        mentorChoiceMap.put(1, "Show students list");
+        mentorChoiceMap.put(2, "Add an assignment");
+        mentorChoiceMap.put(3, "Grade an assignment");
+        mentorChoiceMap.put(4, "Check students attendance");
+        mentorChoiceMap.put(5, "Add student to class");
+        mentorChoiceMap.put(6, "Remove student from class");
+        mentorChoiceMap.put(7, "Edit student's data");
+        mentorChoiceMap.put(8, "Logout");
+        return mentorChoiceMap;
+    }
+
+    private Map<Integer, String> makeEmployeeChoiceMap() {
         Map<Integer, String> customerChoiceMap = new HashMap<>();
-        customerChoiceMap.put(1, "Show my basket");
-        customerChoiceMap.put(2, "Add product to basket");
-        customerChoiceMap.put(3, "Remove product from basket");
-        customerChoiceMap.put(4, "Edit product's quantity");
-        customerChoiceMap.put(5, "Place an order");
-        customerChoiceMap.put(6, "Show my previous orders");
-        customerChoiceMap.put(7, "Show all available products with rates");
-        customerChoiceMap.put(8, "Show products by category");
-//        customerChoiceMap.put(9, "Check availability of product");
-//        customerChoiceMap.put(10, "Rate product");
-//        customerChoiceMap.put(11, "Statistics of orders");
-        customerChoiceMap.put(12, "Logout");
+        customerChoiceMap.put(1, "Show detailed students list");
+        customerChoiceMap.put(2, "Logout");
         return customerChoiceMap;
     }
 
     private Map<Integer, String> makeAdminChoiceMap() {
         Map<Integer, String> adminChoiceMap = new HashMap<>();
-        adminChoiceMap.put(1, "Create new product");
-        adminChoiceMap.put(2, "Edit product");
-        adminChoiceMap.put(3, "Deactivate product");
-        adminChoiceMap.put(4, "Create product category");
-        adminChoiceMap.put(5, "Edit product category");
-//        adminChoiceMap.put(6, "Check orders statuses");
-//        adminChoiceMap.put(7, "Discount product");
-//        adminChoiceMap.put(8, "Check statistics");
-        adminChoiceMap.put(9, "Logout");
+        adminChoiceMap.put(1, "Add new mentor");
+        adminChoiceMap.put(2, "Remove mentor");
+        adminChoiceMap.put(3, "Edit mentor's data");
+        adminChoiceMap.put(4, "Show mentors list");
+        adminChoiceMap.put(5, "Show students list");
+        adminChoiceMap.put(6, "Logout");
         return adminChoiceMap;
     }
+
+
 }
