@@ -20,5 +20,9 @@ public class AdminDao extends Dao {
         return new User(name, surname, email, password, phoneNumber, idRole);
     }
 
+    public void addUserToDB() {
+        User newUser = createUser();
+        addUser(newUser);
+    }
 
 }
