@@ -3,13 +3,22 @@ package com.codecool.models;
 public class User {
     private int id;
     private String name;
+    private String surname;
     private String password;
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
     private int role;
 
-    public User(int id, String name, String password, String email, int phoneNumber, int role) {
+    public User(int id, String name, String surname, String password, String email, String phoneNumber, int role) {
         this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+    }
+
+    public User(String name, String surname, String email, String password, String phoneNumber, int idRole) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -41,6 +50,14 @@ public class User {
         this.id = id;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -57,11 +74,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
