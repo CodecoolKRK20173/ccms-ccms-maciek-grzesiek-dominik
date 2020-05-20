@@ -4,7 +4,7 @@ import com.codecool.IO;
 import com.codecool.models.User;
 
 public class AdminDao extends Dao {
-    private IO io;
+    private final IO io;
 
     AdminDao() {
         io = new IO();
@@ -16,7 +16,8 @@ public class AdminDao extends Dao {
         String email = io.gatherInput("New user's email: ");
         String password = io.gatherInput("New user's password: ");
         String phoneNumber = io.gatherInput("New user's phone number: ");
-        int idRole = io.gatherIntInput("New user's role id: ", 1, 4);
+        int idRole = io.gatherIntInput("New user's role id(1 - Admin " +
+                "2 - Mentor 3 - Student 4 - Employee): ", 1, 4);
         return new User(name, surname, email, password, phoneNumber, idRole);
     }
 
