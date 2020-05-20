@@ -25,13 +25,14 @@ public class UserDao extends Dao{
     }
 
     private User createUser(ResultSet results) throws SQLException{
-        int userId = results.getInt("id");
-        String name = results.getString("name");
-        String password = results.getString("password");
-        String email = results.getString("email");
-        int phoneNumber = results.getInt("phone");
-        int role = results.getInt("role_id");
-        return new User(userId, name, password, email,  phoneNumber, role);
+        int userId = results.getInt("Id");
+        String email = results.getString("Email");
+        String password = results.getString("Password");
+        String name = results.getString("Name");
+        String surname = results.getString("Surname");
+        String phoneNumber = results.getString("PhoneNumber");
+        int role = results.getInt("RoleId");
+        return new User(userId, email,password, name, surname, phoneNumber, role);
     }
 
     public User getUser(String email, String password) {
@@ -63,7 +64,7 @@ public class UserDao extends Dao{
             addUser.setString(1, user.getName());
             addUser.setString(2, user.getEmail());
             addUser.setString(3, user.getPassword());
-            addUser.setInt(4, user.getPhoneNumber());
+            addUser.setString(4, user.getPhoneNumber());
             addUser.setInt(5, user.getRole());
             addUser.executeUpdate();
             addUser.close();

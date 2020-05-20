@@ -15,7 +15,6 @@ public class MenuHandler {
     private final UI ui;
     private final IO io;
     private AdminDao adminDao;
-    private EmployeeDao employeeDao;
     private MentorDao mentorDao;
     private StudentDao studentDao;
     private UserDao userDao;
@@ -23,6 +22,7 @@ public class MenuHandler {
     private Map<Integer, Runnable> employeeMenu;
     private Map<Integer, Runnable> mentorMenu;
     private Map<Integer, Runnable> studentMenu;
+    private Map<Integer, Runnable> mainMenu;
     private boolean isLogin;
 
     public MenuHandler() {
