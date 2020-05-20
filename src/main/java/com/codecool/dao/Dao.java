@@ -61,30 +61,6 @@ public abstract class Dao {
         }
     }
 
-    public User createUser(ResultSet results) throws SQLException{
-        int userId = results.getInt("id");
-        String name = results.getString("name");
-        String surname = results.getString("Surname");
-        String password = results.getString("password");
-        String email = results.getString("email");
-        String phoneNumber = results.getString("phone");
-        int role = results.getInt("role_id");
-        return new User(userId, name, surname, password, email, phoneNumber, role);
-    }
-
-    public List<User> getUsersList() {
-        List<User> users = new ArrayList<>();
-        connect();
-        try {
-            ResultSet results = statement.executeQuery("SELECT * FROM Users;");
-            while (results.next()) {
-                users.add(createUser(results));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
     public void remove(String table, String id) {
         String query = String.format("DELETE FROM %s WHERE Id = %s;", table, id);
 
