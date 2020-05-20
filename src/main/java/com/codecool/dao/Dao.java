@@ -85,5 +85,15 @@ public abstract class Dao {
         }
         return users;
     }
+    public void remove(String table, String id) {
+        String query = String.format("DELETE FROM %s WHERE Id = %s;", table, id);
+
+        connect();
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
