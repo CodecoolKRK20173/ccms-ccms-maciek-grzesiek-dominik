@@ -85,8 +85,8 @@ public class MenuHandler {
 
     private void initializeAdminMenu() {
         adminMenu = new HashMap<>();
-//        adminMenu.put(1, this::addNewMentor);
-//        adminMenu.put(2, this::removeMentor);
+        adminMenu.put(1, this::addUserToDB);
+        adminMenu.put(2, this::removeUser);
 //        adminMenu.put(3, this::editMentorData);
 //        adminMenu.put(4, this::getMentorsList);
 //        adminMenu.put(5, this::getStudentsList);
@@ -153,5 +153,25 @@ public class MenuHandler {
     private void isLogin() {
         isLogin = false;
         System.out.println("\nYou will be logged out\n");
+    }
+
+    private void addUserToDB() {
+        User newUser = createUser();
+        adminDao.addUser(newUser);
+    }
+
+    private User createUser() {
+        String name = io.gatherInput("New user's name: ");
+        String surname = io.gatherInput("New user's surname: ");
+        String email = io.gatherInput("New user's email: ");
+        String password = io.gatherInput("New user's password: ");
+        String phoneNumber = io.gatherInput("New user's phone number: ");
+        int idRole = io.gatherIntInput("New user's role id(1 - Admin " +
+                "2 - Mentor 3 - Student 4 - Employee): ", 1, 4);
+        return new User(name, surname, email, password, phoneNumber, idRole);
+    }
+
+    private void removeUser() {
+        adminDao.remove("Users", io.gatherInput("Give id of student that you want to remove"));
     }
 }

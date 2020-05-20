@@ -1,18 +1,15 @@
 package com.codecool.dao;
 
 import com.codecool.IO;
-import com.codecool.UI;
 import com.codecool.models.User;
 
 import java.util.List;
 
 public class AdminDao extends Dao {
     private final IO io;
-    private final UI ui;
 
     public AdminDao() {
         io = new IO();
-        ui = new UI(); //TODO: move that to somewhere else!!!
     }
 
     private User createUser() {
@@ -25,16 +22,4 @@ public class AdminDao extends Dao {
                 "2 - Mentor 3 - Student 4 - Employee): ", 1, 4);
         return new User(name, surname, email, password, phoneNumber, idRole);
     }
-
-    public void addUserToDB() {
-        User newUser = createUser();
-        addUser(newUser);
-    }
-
-    public void removeUser(){
-        String[] tempUsers = new String[getUsersList().size()];
-        ui.displayInLine(getUsersList().toArray(tempUsers));
-        remove("Users",io.gatherInput("Give id of student that you want to remove"));
-    }
-
 }
