@@ -30,3 +30,28 @@ public class UserDao extends Dao{
         }
         throw new NoSuchElementException("There isn't user with specified data in database");
     }
+
+    public List<User> getUsers() {
+        List<User> users = new ArrayList<>();
+        connect();
+        try {
+            ResultSet results = statement.executeQuery("SELECT * FROM Users;");
+            while (results.next()) {
+                users.add(createUser(results));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    private User createUser(ResultSet results) throws SQLException{
+        String userId = results.getString("id");
+        String name = results.getString("name");
+        String password = results.getString("password");
+        String email = results.getString("email");
+        String phoneNumber = results.getString("phone");
+        int role = results.getInt("role_id");
+        return new User(userId, name, password, email,  phoneNumber, role);
+    }
+    }

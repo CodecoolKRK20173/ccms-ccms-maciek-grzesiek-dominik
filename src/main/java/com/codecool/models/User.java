@@ -68,9 +68,9 @@ public class User {
 
     public void setSurname(String surname) { this.surname = surname; }
 
-    public void getSurname(String surname) { this.surname = surname; }
+    public String getSurname() { return surname; }
 
     public void setClassId(int classId) { this.classId = classId; }
 
-    public void getClassId(int classId) { this.classId = classId; }
+    public int getClassId() { return classId; }
 }
