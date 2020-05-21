@@ -11,8 +11,6 @@ import java.util.NoSuchElementException;
 public class UserDao extends Dao{
 
 
-
-
     public User getUser(String email, String password) {
         connect();
         try {
@@ -22,7 +20,7 @@ public class UserDao extends Dao{
             ResultSet results = statement.executeQuery();
             List<User> users = getUsers();
             int indexDifference = 1;
-            int id = results.getInt("id") - indexDifference;
+            int id = results.getInt("UserId") - indexDifference;
             results.close();
             statement.close();
             connection.close();
@@ -32,6 +30,3 @@ public class UserDao extends Dao{
         }
         throw new NoSuchElementException("There isn't user with specified data in database");
     }
-
-
-}

@@ -15,7 +15,6 @@ public class MenuHandler {
     private final UI ui;
     private final IO io;
     private AdminDao adminDao;
-    private EmployeeDao employeeDao;
     private MentorDao mentorDao;
     private StudentDao studentDao;
     private UserDao userDao;
@@ -23,6 +22,7 @@ public class MenuHandler {
     private Map<Integer, Runnable> employeeMenu;
     private Map<Integer, Runnable> mentorMenu;
     private Map<Integer, Runnable> studentMenu;
+    private Map<Integer, Runnable> mainMenu;
     private boolean isLogin;
 
     public MenuHandler() {
@@ -65,15 +65,15 @@ public class MenuHandler {
                 initializeAdminMenu();
                 adminPanel();
                 break;
-            case 2:
+            case 4:
                 initializeEmployeeMenu(user);
                 employeePanel();
                 break;
-            case 3:
+            case 2:
                 initializeMentorMenu(user);
                 mentorPanel();
                 break;
-            case 4:
+            case 3:
                 initializeStudentMenu(user);
                 studentPanel();
         }
@@ -117,7 +117,7 @@ public class MenuHandler {
 
     private void initializeMentorMenu(User user) {
         mentorMenu = new HashMap<>();
-//        mentorMenu.put(1, user::getStudentsList);
+        mentorMenu.put(1, mentorDao::getStudentsList);
 //        mentorMenu.put(2, user::addAssignment);
 //        mentorMenu.put(3, user::gradeAssignment);
 //        mentorMenu.put(4, user::checkAttendance);
