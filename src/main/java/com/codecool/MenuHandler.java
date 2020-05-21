@@ -1,6 +1,9 @@
 package com.codecool;
 
-import com.codecool.dao.*;
+import com.codecool.dao.AdminDao;
+import com.codecool.dao.MentorDao;
+import com.codecool.dao.StudentDao;
+import com.codecool.dao.UserDao;
 import com.codecool.models.Classes;
 import com.codecool.models.User;
 
@@ -8,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuHandler {
+    private final UI ui;
+    private final IO io;
     public boolean isRunning;
     private Map<Integer, Runnable> mainMEmployeeDao;
     private String[] mainMenuList;
-    private final UI ui;
-    private final IO io;
     private AdminDao adminDao;
     private MentorDao mentorDao;
     private StudentDao studentDao;
@@ -32,7 +35,7 @@ public class MenuHandler {
         initializeMainMenu();
     }
 
-    private void initializeDao(){
+    private void initializeDao() {
         this.adminDao = new AdminDao();
         this.mentorDao = new MentorDao();
         this.studentDao = new StudentDao();
@@ -40,7 +43,7 @@ public class MenuHandler {
     }
 
     private void initializeMainMenu() {
-        mainMenuList = new String[] {"1. Login", "2. Exit"};
+        mainMenuList = new String[]{"1. Login", "2. Exit"};
         mainMenu = new HashMap<>();
         mainMenu.put(1, this::login);
         mainMenu.put(2, this::exit);
@@ -49,7 +52,7 @@ public class MenuHandler {
     public void mainMenu() {
         ui.displayMainMenu();
         ui.displayInLine(mainMenuList);
-        int userChoice = io.gatherIntInput("\nEnter a number: ",1, 2);
+        int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 2);
         mainMenu.get(userChoice).run();
     }
 
@@ -93,7 +96,7 @@ public class MenuHandler {
     }
 
     private void adminPanel() {
-        while(isLogin){
+        while (isLogin) {
             ui.displayAdminMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 6);
             adminMenu.get(userChoice).run();
@@ -107,7 +110,7 @@ public class MenuHandler {
     }
 
     private void employeePanel() {
-        while(isLogin) {
+        while (isLogin) {
             ui.displayEmployeeMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 2);
             employeeMenu.get(userChoice).run();
@@ -129,7 +132,7 @@ public class MenuHandler {
     private void mentorPanel() {
         while (isLogin) {
             ui.displayMentorMenu();
-            int userChoice = io.gatherIntInput("\nEnter a number: ",1,8);
+            int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 8);
             mentorMenu.get(userChoice).run();
         }
     }
@@ -144,7 +147,7 @@ public class MenuHandler {
     private void studentPanel() {
         while (isLogin) {
             ui.displayStudentMenu();
-            int userChoice = io.gatherIntInput("\nEnter a number:",1,3);
+            int userChoice = io.gatherIntInput("\nEnter a number:", 1, 3);
             studentMenu.get(userChoice).run();
         }
     }
@@ -157,24 +160,24 @@ public class MenuHandler {
     private void addAssignment() {
         System.out.println("You are adding new assignment to data base");
         String name = io.gatherInput("Enter name of new assignment: ");
-        mentorDao.addAsignment(new Classes(0,name));
-
-    private void addMentorToDB() {
-        User newUser = createMentor();
-        adminDao.addMentor(newUser);
+        mentorDao.addAsignment(new Classes(0, name));
     }
+        private void addMentorToDB () {
+            User newUser = createMentor();
+            adminDao.addMentor(newUser);
+        }
 
-    private User createMentor() {
-        String name = io.gatherInput("New mentor's name: ");
-        String surname = io.gatherInput("New mentor's surname: ");
-        String email = io.gatherInput("New mentor's email: ");
-        String password = io.gatherInput("New mentor's password: ");
-        String phoneNumber = io.gatherInput("New mentor's phone number: ");
-        int idRole = 2;
-        return new User(name, surname, email, password, phoneNumber, idRole);
-    }
+        private User createMentor () {
+            String name = io.gatherInput("New mentor's name: ");
+            String surname = io.gatherInput("New mentor's surname: ");
+            String email = io.gatherInput("New mentor's email: ");
+            String password = io.gatherInput("New mentor's password: ");
+            String phoneNumber = io.gatherInput("New mentor's phone number: ");
+            int idRole = 2;
+            return new User(name, surname, email, password, phoneNumber, idRole);
+        }
 
-    private void removeMentor() {
-        adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
-    }
+        private void removeMentor () {
+            adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
+        }
 }
