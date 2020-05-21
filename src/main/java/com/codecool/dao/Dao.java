@@ -62,14 +62,15 @@ public abstract class Dao {
     }
 
     public User createUser(ResultSet results) throws SQLException{
-        int userId = results.getInt("id");
+        int userId = results.getInt("UserId");
         String name = results.getString("name");
         String surname = results.getString("Surname");
-        String password = results.getString("password");
-        String email = results.getString("email");
-        String phoneNumber = results.getString("phone");
-        int role = results.getInt("role_id");
-        return new User(userId, name, surname, password, email, phoneNumber, role);
+        String password = results.getString("Password");
+        String email = results.getString("Email");
+        String phoneNumber = results.getString("PhoneNumber");
+        int role = results.getInt("RoleId");
+        int classId = results.getInt("ClassId");
+        return new User(userId, name, surname, password, email, phoneNumber, role, classId);
     }
 
     public List<User> getUsersList() {

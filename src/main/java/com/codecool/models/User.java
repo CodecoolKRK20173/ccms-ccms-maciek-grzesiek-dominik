@@ -24,14 +24,6 @@ public class User {
         this.classId = classId;
     }
 
-    public User(String name, String surname, String email, String password, String phoneNumber, int idRole) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
-    }
-
     public String getName() {
         return name;
     }
@@ -68,7 +60,9 @@ public class User {
 
     public void setSurname(String surname) { this.surname = surname; }
 
-    public void getSurname(String surname) { this.surname = surname; }
+    public String getSurname() {
+        return surname;
+    }
 
     public void setClassId(int classId) { this.classId = classId; }
 

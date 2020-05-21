@@ -8,8 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class UserDao extends Dao{
+public class UserDao extends Dao {
 
+    public List<User> getUsers() {
+        List<User> users = new ArrayList<>();
+        connect();
+        try {
+            ResultSet results = statement.executeQuery("SELECT * FROM Users;");
+            while (results.next()) {
+                users.add(createUser(results));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
 
     public User getUser(String email, String password) {
         connect();
@@ -30,3 +43,4 @@ public class UserDao extends Dao{
         }
         throw new NoSuchElementException("There isn't user with specified data in database");
     }
+}

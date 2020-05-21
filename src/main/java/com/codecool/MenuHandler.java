@@ -1,6 +1,7 @@
 package com.codecool;
 
 import com.codecool.dao.*;
+import com.codecool.models.Classes;
 import com.codecool.models.User;
 
 import javax.print.attribute.HashAttributeSet;
@@ -118,7 +119,7 @@ public class MenuHandler {
     private void initializeMentorMenu(User user) {
         mentorMenu = new HashMap<>();
         mentorMenu.put(1, mentorDao::getStudentsList);
-//        mentorMenu.put(2, user::addAssignment);
+        mentorMenu.put(2, this::addAssignment);
 //        mentorMenu.put(3, user::gradeAssignment);
 //        mentorMenu.put(4, user::checkAttendance);
 //        mentorMenu.put(5, user::addStudentToClass);
@@ -153,5 +154,11 @@ public class MenuHandler {
     private void isLogin() {
         isLogin = false;
         System.out.println("\nYou will be logged out\n");
+    }
+
+    private void addAssignment() {
+        System.out.println("You are adding new assignment to data base");
+        String name = io.gatherInput("Enter name of new assignment: ");
+        mentorDao.addAsignment(new Classes(0,name));
     }
 }

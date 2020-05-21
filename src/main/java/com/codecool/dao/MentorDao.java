@@ -52,10 +52,10 @@ public class MentorDao extends Dao {
         }
     }
 
-    public void addAsignment(Classes classes) {
+    public void addAsignment(Classes classes) { // NIE SKONCZONE! DODAC DO MENU HANDLER OBSLUGE
         connect();
         PreparedStatement addAsignment;
-        String sql = "INSERT INTO Classes (Name) VALUES (?)";
+        String sql = "INSERT INTO Assigments (Name) VALUES (?)";
         try {
             addAsignment = connection.prepareStatement(sql);
             addAsignment.setString(1, classes.getClassName());
