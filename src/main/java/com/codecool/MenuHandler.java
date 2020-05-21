@@ -119,7 +119,7 @@ public class MenuHandler {
 
     private void initializeMentorMenu(User user) {
         mentorMenu = new HashMap<>();
-        mentorMenu.put(1, mentorDao::getStudentsList);
+        mentorMenu.put(1, studentDao::getStudentInfoArrayMentor);
         mentorMenu.put(2, this::addAssignment);
 //        mentorMenu.put(3, user::gradeAssignment);
 //        mentorMenu.put(4, user::checkAttendance);
