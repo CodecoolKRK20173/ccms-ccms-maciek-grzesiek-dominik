@@ -71,7 +71,7 @@ public class UserDao extends Dao {
     }
 
 
-    public void printUserInfo(Boolean withGrades, String role, String... columns) {
+    private void printUserInfo(Boolean withGrades, String role, String... columns) {
         connect();
         List<List<String>> allUsersInfo = new ArrayList<>();
         try {
@@ -116,7 +116,7 @@ public class UserDao extends Dao {
         System.out.println(FlipTable.of(headers, makeArrayFromList(allUsersInfo)));
     }
 
-    public String[][] makeArrayFromList(List<List<String>> userData) {
+    private String[][] makeArrayFromList(List<List<String>> userData) {
         if (userData.size() == 0) {
             return new String[][] {{""}};
         }

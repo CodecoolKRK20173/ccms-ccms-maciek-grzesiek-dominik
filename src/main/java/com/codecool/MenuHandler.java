@@ -24,6 +24,7 @@ public class MenuHandler {
     private Map<Integer, Runnable> mentorMenu;
     private Map<Integer, Runnable> studentMenu;
     private Map<Integer, Runnable> mainMenu;
+    private User user;
     private boolean isLogin;
 
     public MenuHandler() {
@@ -59,7 +60,7 @@ public class MenuHandler {
         ui.clearScreen();
         String email = io.gatherInput("Enter Email: ");
         String password = io.gatherInput("Enter Password: ");
-        User user = userDao.getUser(email, password);
+        this.user = userDao.getUser(email, password);
         isLogin = true;
         switch (user.getRole()) {
             case 1:
@@ -89,8 +90,8 @@ public class MenuHandler {
         adminMenu.put(1, this::addMentorToDB);
         adminMenu.put(2, this::removeMentor);
 //        adminMenu.put(3, this::editMentorData);
-//        adminMenu.put(4, this::getMentorsList);
-//        adminMenu.put(5, this::getStudentsList);
+        adminMenu.put(4, userDao::printMentorsList);
+        adminMenu.put(5, userDao::printStudentsListAsAdmin);
         adminMenu.put(6, this::isLogin);
     }
 
@@ -104,7 +105,7 @@ public class MenuHandler {
 
     private void initializeEmployeeMenu(User user) {
         employeeMenu = new HashMap<>();
-//        employeeMenu.put(1, EmployeeDao::getStudentsDetailsList);
+        employeeMenu.put(1, userDao::printStudentsListAsEmployee);
         employeeMenu.put(2, this::isLogin);
     }
 
@@ -118,7 +119,7 @@ public class MenuHandler {
 
     private void initializeMentorMenu(User user) {
         mentorMenu = new HashMap<>();
-        mentorMenu.put(1, studentDao::getStudentInfoArrayMentor);
+        mentorMenu.put(1, userDao::printStudentsListAsMentor);
         mentorMenu.put(2, this::addAssignment);
 //        mentorMenu.put(3, user::gradeAssignment);
 //        mentorMenu.put(4, user::checkAttendance);
@@ -152,6 +153,7 @@ public class MenuHandler {
     }
 
     private void isLogin() {
+        this.user = null;
         isLogin = false;
         System.out.println("\nYou will be logged out\n");
     }
@@ -185,4 +187,14 @@ public class MenuHandler {
         private void removeMentor () {
             adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
         }
+
+    private void submitAssigmentByUser() {
+        String assignmentName = io.gatherInput("Provide assigment's name");
+        String filePath = io.gatherInput("Provide assignment's url");
+        studentDao.submitAssignment(user.getId(), filePath, assignmentName);
+    }
+
+    private void printAssignmentByUser() {
+        studentDao.printStudentGrades(this.user.getId());
+    }
 }
