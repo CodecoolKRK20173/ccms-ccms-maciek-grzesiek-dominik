@@ -67,7 +67,7 @@ public class MenuHandler {
                 adminPanel();
                 break;
             case 4:
-                initializeEmployeeMenu(user);
+                initializeEmployeeMenu();
                 employeePanel();
                 break;
             case 2:
@@ -102,7 +102,7 @@ public class MenuHandler {
         }
     }
 
-    private void initializeEmployeeMenu(User user) {
+    private void initializeEmployeeMenu() {
         employeeMenu = new HashMap<>();
         employeeMenu.put(1, userDao::printStudentsListAsEmployee);
         employeeMenu.put(2, this::isLogin);
