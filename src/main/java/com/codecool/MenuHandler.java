@@ -138,8 +138,8 @@ public class MenuHandler {
 
     private void initializeStudentMenu(User user) {
         studentMenu = new HashMap<>();
-//        studentMenu.put(1, user::submitAssignment);
-//        studentMenu.put(2, user::showGrades);
+        studentMenu.put(1, this::submitAssignmentByUser);
+        studentMenu.put(2, this::printAssignmentByUser);
         studentMenu.put(3, this::isLogin);
     }
 
@@ -188,14 +188,14 @@ public class MenuHandler {
         private void removeMentor () {
             adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
         }
-
+  
         private void editMentor() {
         adminDao.editMentorData(io.gatherInput("Give id of mentor whose data you want to edit: "),
                 io.gatherInput("Give name of parameter that you want to change:"),
                 io.gatherInput("Give new value of that data: "));
         }
-
-    private void submitAssigmentByUser() {
+  
+    private void submitAssignmentByUser() {
         String assignmentName = io.gatherInput("Provide assigment's name");
         String filePath = io.gatherInput("Provide assignment's url");
         studentDao.submitAssignment(user.getId(), filePath, assignmentName);
