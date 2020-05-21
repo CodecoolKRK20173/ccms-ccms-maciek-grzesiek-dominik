@@ -14,7 +14,6 @@ public class MenuHandler {
     private final UI ui;
     private final IO io;
     public boolean isRunning;
-    private Map<Integer, Runnable> mainMEmployeeDao;
     private String[] mainMenuList;
     private AdminDao adminDao;
     private MentorDao mentorDao;
@@ -160,7 +159,13 @@ public class MenuHandler {
     private void addAssignment() {
         System.out.println("You are adding new assignment to data base");
         String name = io.gatherInput("Enter name of new assignment: ");
-        mentorDao.addAsignment(new Classes(0, name));
+        mentorDao.addAssignment(new Classes(0, name));
+    }
+
+    private void gradeAssignment() {
+        System.out.println("You are changing student's grade");
+        int studentId = io.gatherIntInput("Enter student's ID to see his assignments",1,666); // POPRAWIC max range
+
     }
         private void addMentorToDB () {
             User newUser = createMentor();

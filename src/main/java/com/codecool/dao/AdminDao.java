@@ -31,7 +31,7 @@ public class AdminDao extends Dao {
     }
 
     public void remove(String table, String id) {
-        String query = String.format("DELETE FROM %s WHERE Id = %s;", table, id);
+        String query = String.format("DELETE FROM %s WHERE UserId = %s;", table, id);
 
         connect();
         try {

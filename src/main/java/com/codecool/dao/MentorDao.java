@@ -52,18 +52,24 @@ public class MentorDao extends Dao {
         }
     }
 
-    public void addAsignment(Classes classes) { // NIE SKONCZONE! DODAC DO MENU HANDLER OBSLUGE
+    public void addAssignment(Classes classes) {
         connect();
-        PreparedStatement addAsignment;
-        String sql = "INSERT INTO Assigments (Name) VALUES (?)";
+        PreparedStatement addAssignment;
+        String sql = "INSERT INTO Assignments (Name) VALUES (?)";
         try {
-            addAsignment = connection.prepareStatement(sql);
-            addAsignment.setString(1, classes.getClassName());
-            addAsignment.executeUpdate();
-            addAsignment.close();
+            addAssignment = connection.prepareStatement(sql);
+            addAssignment.setString(1, classes.getClassName());
+            addAssignment.executeUpdate();
+            addAssignment.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void gradeAssignment() {
+    connect();
+    PreparedStatement gradeAssignment;
+    String sql = "SELECT * FROM Grades"
     }
 }
