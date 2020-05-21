@@ -1,5 +1,7 @@
-package com.codecool;
+package com.codecool.controllers;
 
+import com.codecool.IO;
+import com.codecool.UI;
 import com.codecool.dao.*;
 import com.codecool.models.Classes;
 import com.codecool.models.User;
@@ -196,7 +198,7 @@ public class MenuHandler {
         }
   
     private void submitAssignmentByUser() {
-        String assignmentName = io.gatherInput("Provide assigment's name");
+        String assignmentName = io.gatherInput("Provide assignment's name");
         String filePath = io.gatherInput("Provide assignment's url");
         studentDao.submitAssignment(user.getId(), filePath, assignmentName);
     }
