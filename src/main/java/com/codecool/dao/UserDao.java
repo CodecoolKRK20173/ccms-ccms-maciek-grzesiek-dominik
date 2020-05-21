@@ -80,8 +80,8 @@ public class UserDao extends Dao {
                     "u.phonenumber AS Phone_number " +
                     "FROM Users u " +
                     "JOIN Role r ON r.ID = u.roleID " +
-                    "JOIN UserClasses uc ON uc.UserID =  u.UserID " +
-                    "JOIN Classes c ON c.classID = uc.classID " +
+                    "LEFT JOIN UserClasses uc ON uc.UserID =  u.UserID " +
+                    "LEFT JOIN Classes c ON c.classID = uc.classID " +
                     "WHERE r.role = " + role + ";");
             while(results.next()) {
                 String id = results.getString("User_Id");
