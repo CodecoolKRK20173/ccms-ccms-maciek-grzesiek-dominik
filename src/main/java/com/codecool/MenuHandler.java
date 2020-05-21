@@ -89,7 +89,7 @@ public class MenuHandler {
         adminMenu = new HashMap<>();
         adminMenu.put(1, this::addMentorToDB);
         adminMenu.put(2, this::removeMentor);
-//        adminMenu.put(3, this::editMentorData);
+        adminMenu.put(3, this::editMentor);
 //        adminMenu.put(4, this::getMentorsList);
 //        adminMenu.put(5, this::getStudentsList);
         adminMenu.put(6, this::isLogin);
@@ -179,5 +179,11 @@ public class MenuHandler {
 
         private void removeMentor () {
             adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
+        }
+
+        private void editMentor() {
+        adminDao.editMentorData(io.gatherInput("Give id of mentor whose data you want to edit: "),
+                io.gatherInput("Give name of parameter that you want to change:"),
+                io.gatherInput("Give new value of that data: "));
         }
 }
