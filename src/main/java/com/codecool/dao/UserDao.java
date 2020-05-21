@@ -10,31 +10,6 @@ import java.util.NoSuchElementException;
 
 public class UserDao extends Dao{
 
-    public List<User> getUsers() {
-        List<User> users = new ArrayList<>();
-        connect();
-        try {
-            ResultSet results = statement.executeQuery("SELECT * FROM Users;");
-            while (results.next()) {
-                users.add(createUser(results));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
-
-    private User createUser(ResultSet results) throws SQLException{
-        int userId = results.getInt("UserId");
-        String email = results.getString("Email");
-        String password = results.getString("Password");
-        String name = results.getString("Name");
-        String surname = results.getString("Surname");
-        String phoneNumber = results.getString("PhoneNumber");
-        int role = results.getInt("RoleId");
-        int classID = results.getInt("ClassId");
-        return new User(userId, email,password, name, surname, phoneNumber, role, classID);
-    }
 
     public User getUser(String email, String password) {
         connect();
@@ -55,23 +30,3 @@ public class UserDao extends Dao{
         }
         throw new NoSuchElementException("There isn't user with specified data in database");
     }
-
-    public void addUser(User user) {
-        connect();
-        PreparedStatement addUser;
-        String addString = "INSERT INTO Users (name, email, password, phone, role_id) VALUES (?, ?, ?, ?, ?)";
-        try {
-            addUser = connection.prepareStatement(addString);
-            addUser.setString(1, user.getName());
-            addUser.setString(2, user.getEmail());
-            addUser.setString(3, user.getPassword());
-            addUser.setString(4, user.getPhoneNumber());
-            addUser.setInt(5, user.getRole());
-            addUser.executeUpdate();
-            addUser.close();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}

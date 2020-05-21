@@ -10,6 +10,9 @@ public class User {
     private int role;
     private int classId;
 
+
+ 
+
     public User(int id, String email, String password, String name, String surname, String phoneNumber, int role, int classId) {
         this.id = id;
         this.name = name;
@@ -19,6 +22,14 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.role = role;
         this.classId = classId;
+    }
+
+    public User(String name, String surname, String email, String password, String phoneNumber, int idRole) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public String getName() {
