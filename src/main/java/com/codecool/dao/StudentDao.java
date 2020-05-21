@@ -1,5 +1,7 @@
 package com.codecool.dao;
 
+import com.jakewharton.fliptables.FlipTable;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class StudentDao extends Dao {
 
     }
 
-    public String[][] getGradesArray(int studentID, String assignmentName) {
+    public void printStudentGrades(int studentID) {
 
         connect();
         List<List<String>> grades = new ArrayList<>();
@@ -48,7 +50,7 @@ public class StudentDao extends Dao {
                     "JOIN Users u ON u.ID = ua.ID " +
                     "JOIN Users evaluator ON g.ID = evaluator.ID " +
                     "JOIN Assignments a ON a.ID = ua.AssignmentID" +
-                    "WHERE u.ID = " + studentID + " AND a.name = " + assignmentName + ";");
+                    "WHERE u.ID = " + studentID + ";");
             while (results.next()) {
                 List<String> grade = new ArrayList<>();
                 grade.add(results.getString("assignment_name"));
@@ -64,15 +66,21 @@ public class StudentDao extends Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new UserDao().makeArrayFromList(grades);
+        printGradesList(grades);
 
     }
 
-    public String[][] getStudentInfoArrayMentor() {
-        return new UserDao().getUserInfoArray(true, "name", "surname", "email");
+    private void printGradesList(List<List<String>> gradesList) {
+        if (gradesList.size() == 0) return;
+        String[] headers = {"Assignment_name", "Evaluator_name", "Evaluator_surname", "Date", "Grade"};
+        int gradeSize = gradesList.get(0).size();
+        String[][] grades = new String[gradesList.size()][gradeSize];
+        for (int i = 0; i < grades.length; i++) {
+            grades[i] = gradesList.get(0).toArray(new String[gradeSize]);
+        }
+        System.out.println(FlipTable.of(headers, grades));
+
+
     }
-
-
-
 
 }
