@@ -25,12 +25,12 @@ public abstract class Dao {
         }
     }
 
-    public void update(String table, String id, String column, String newValue) {
-        if (column.toLowerCase().equals("id")) {
+    public void update(String table, String id, String column, String newValue) { //TODO change name to updateUser and maybe move that
+        if (column.toLowerCase().equals("UserId")) {
             System.out.println("You can't change id");
             return;
         }
-        String query = String.format("UPDATE %s SET %s = %s WHERE Id = %s;", table, column, newValue, id);
+        String query = String.format("UPDATE %s SET %s = '%s' WHERE UserId = %s;", table, column, newValue, id);
 //                "UPDATE " + table + " SET " + column + " = " + newValue + " WHERE Id = " + id + ";";
 
         connect();
