@@ -36,7 +36,11 @@ public class GradesDao extends Dao {
     }
 
     public void showAllGradesByUser() {
-        String sql = "SELECT * FROM Grades WHERE ";
+        String sql = "SELECT ua.Id, ua.Assignment, ua.UserId, ua.CreatedAt, ua.SubmitedAt, \n" +
+                "u.Name, u.Surname, g.Grade, g.CreatedAt, g.EvaluatorId\n" +
+                "FROM UserAssignment ua\n" +
+                "JOIN Users u ON u.UserId = ua.UserId\n" +
+                "JOIN Grades g ON g.UserAssignmentID = ua.Id;";
         connect();
         try {
             ResultSet rs = statement.executeQuery(sql);

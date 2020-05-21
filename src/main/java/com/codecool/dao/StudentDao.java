@@ -4,6 +4,8 @@ import com.jakewharton.fliptables.FlipTable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,11 +21,11 @@ public class StudentDao extends Dao {
 
     public void submitAssignment(int studentID, String assignmentName, String filePath) {
         connect();
-        Date date = new Date(System.currentTimeMillis());
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         try {
             statement.executeUpdate("UPDATE UserAssignment " +
-                    "SET SubmitedAt = " + date.toString() + " " +
-                    "SET FilePath = " + filePath + " " +
+                    "SET SubmitedAt = " + date + ", " +
+                    "FilePath = " + filePath + " " +
                     "WHERE userID = " + studentID + " AND " +
                     "AssignmentID = (SELECT ID FROM Assignments " +
                     "WHERE Name = " + assignmentName + ";");
