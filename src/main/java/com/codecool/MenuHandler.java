@@ -1,7 +1,5 @@
-package com.codecool.controllers;
+package com.codecool;
 
-import com.codecool.IO;
-import com.codecool.UI;
 import com.codecool.dao.*;
 import com.codecool.models.Classes;
 import com.codecool.models.User;
@@ -172,30 +170,31 @@ public class MenuHandler {
         String grade = io.gatherInput("Is assignment passed?:" );
         mentorDao.gradeAssignment(assignmentId, grade);
     }
-        private void addMentorToDB () {
-            User newUser = createMentor();
-            adminDao.addMentor(newUser);
-        }
+    
+    private void addMentorToDB () {
+        User newUser = createMentor();
+        adminDao.addMentor(newUser);
+    }
 
-        private User createMentor () {
-            String name = io.gatherInput("New mentor's name: ");
-            String surname = io.gatherInput("New mentor's surname: ");
-            String email = io.gatherInput("New mentor's email: ");
-            String password = io.gatherInput("New mentor's password: ");
-            String phoneNumber = io.gatherInput("New mentor's phone number: ");
-            int idRole = 2;
-            return new User(name, surname, email, password, phoneNumber, idRole);
-        }
+    private User createMentor () {
+        String name = io.gatherInput("New mentor's name: ");
+        String surname = io.gatherInput("New mentor's surname: ");
+        String email = io.gatherInput("New mentor's email: ");
+        String password = io.gatherInput("New mentor's password: ");
+        String phoneNumber = io.gatherInput("New mentor's phone number: ");
+        int idRole = 2;
+        return new User(name, surname, email, password, phoneNumber, idRole);
+    }
 
-        private void removeMentor () {
-            adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
-        }
-  
-        private void editMentor() {
-        adminDao.editMentorData(io.gatherInput("Give id of mentor whose data you want to edit: "),
-                io.gatherInput("Give name of parameter that you want to change:"),
-                io.gatherInput("Give new value of that data: "));
-        }
+    private void removeMentor () {
+        adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
+    }
+
+    private void editMentor() {
+    adminDao.editMentorData(io.gatherInput("Give id of mentor whose data you want to edit: "),
+            io.gatherInput("Give name of parameter that you want to change:"),
+            io.gatherInput("Give new value of that data: "));
+    }
   
     private void submitAssignmentByUser() {
         String assignmentName = io.gatherInput("Provide assignment's name");
