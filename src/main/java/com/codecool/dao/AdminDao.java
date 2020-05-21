@@ -1,18 +1,13 @@
 package com.codecool.dao;
 
-import com.codecool.IO;
-import com.codecool.UI;
 import com.codecool.models.User;
 
-import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class AdminDao extends Dao {
-    private final IO io;
-    private final UI ui;
 
     public AdminDao() {
-        io = new IO();
-        ui = new UI(); //TODO: move that to somewhere else!!!
     }
 
 //    private User createUser() {
@@ -31,10 +26,34 @@ public class AdminDao extends Dao {
 //        addUser(newUser);
 //    }
 
-    public void removeUser(){
-        String[] tempUsers = new String[getUsersList().size()];
-        ui.displayInLine(getUsersList().toArray(tempUsers));
-        remove("Users",io.gatherInput("Give id of student that you want to remove"));
+    public void addMentor(User user) {
+        connect();
+        PreparedStatement addUser;
+        String addString = "INSERT INTO Users (name, surname, email, password, PhoneNumber, RoleId) VALUES (?, ?, ?, ?, ?)";
+        try {
+            addUser = connection.prepareStatement(addString);
+            addUser.setString(1, user.getName());
+            addUser.setString(1, user.getSurname());
+            addUser.setString(2, user.getEmail());
+            addUser.setString(3, user.getPassword());
+            addUser.setString(4, user.getPhoneNumber());
+            addUser.setInt(5, user.getRole());
+            addUser.executeUpdate();
+            addUser.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void remove(String table, String id) {
+        String query = String.format("DELETE FROM %s WHERE Id = %s;", table, id);
+
+        connect();
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
