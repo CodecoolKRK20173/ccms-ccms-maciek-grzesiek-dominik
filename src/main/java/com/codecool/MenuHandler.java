@@ -1,9 +1,6 @@
 package com.codecool;
 
-import com.codecool.dao.AdminDao;
-import com.codecool.dao.MentorDao;
-import com.codecool.dao.StudentDao;
-import com.codecool.dao.UserDao;
+import com.codecool.dao.*;
 import com.codecool.models.Classes;
 import com.codecool.models.User;
 
@@ -19,6 +16,7 @@ public class MenuHandler {
     private MentorDao mentorDao;
     private StudentDao studentDao;
     private UserDao userDao;
+    private GradesDao gradesDao;
     private Map<Integer, Runnable> adminMenu;
     private Map<Integer, Runnable> employeeMenu;
     private Map<Integer, Runnable> mentorMenu;
@@ -40,6 +38,7 @@ public class MenuHandler {
         this.mentorDao = new MentorDao();
         this.studentDao = new StudentDao();
         this.userDao = new UserDao();
+        this.gradesDao = new GradesDao();
     }
 
     private void initializeMainMenu() {
@@ -121,7 +120,7 @@ public class MenuHandler {
         mentorMenu = new HashMap<>();
         mentorMenu.put(1, userDao::printStudentsListAsMentor);
         mentorMenu.put(2, this::addAssignment);
-//        mentorMenu.put(3, user::gradeAssignment);
+        mentorMenu.put(3, this::gradeAssignment);
 //        mentorMenu.put(4, user::checkAttendance);
 //        mentorMenu.put(5, user::addStudentToClass);
 //        mentorMenu.put(6, user::removeStudentFromClass);
@@ -166,8 +165,10 @@ public class MenuHandler {
 
     private void gradeAssignment() {
         System.out.println("You are changing student's grade");
-        int studentId = io.gatherIntInput("Enter student's ID to see his assignments",1,666); // POPRAWIC max range
-
+        gradesDao.showAllGradesByUser();
+        int assignmentId = io.gatherIntInput("Enter assignment ID to grade it",1,666); // POPRAWIC max range
+        String grade = io.gatherInput("Is assignment passed?:" );
+        mentorDao.gradeAssignment(assignmentId, grade);
     }
         private void addMentorToDB () {
             User newUser = createMentor();
