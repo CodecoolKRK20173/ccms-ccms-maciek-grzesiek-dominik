@@ -1,15 +1,15 @@
 package com.codecool.dao;
 
 import com.codecool.models.Classes;
+import com.codecool.models.Grades;
 import com.codecool.models.User;
 import com.jakewharton.fliptables.FlipTableConverters;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MentorDao extends Dao {
     public List<User> getUsers() {
@@ -52,18 +52,37 @@ public class MentorDao extends Dao {
         }
     }
 
-    public void addAsignment(Classes classes) { // NIE SKONCZONE! DODAC DO MENU HANDLER OBSLUGE
+    public void addAssignment(Classes classes) {
         connect();
-        PreparedStatement addAsignment;
-        String sql = "INSERT INTO Assigments (Name) VALUES (?)";
+        PreparedStatement addAssignment;
+        String sql = "INSERT INTO Assignments (Name) VALUES (?)";
         try {
-            addAsignment = connection.prepareStatement(sql);
-            addAsignment.setString(1, classes.getClassName());
-            addAsignment.executeUpdate();
-            addAsignment.close();
+            addAssignment = connection.prepareStatement(sql);
+            addAssignment.setString(1, classes.getClassName());
+            addAssignment.executeUpdate();
+            addAssignment.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void gradeAssignment(int assignmentID, String grade) {
+    connect();
+    PreparedStatement gradeAssignment;
+    String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+    String sql = "UPDATE Grades SET Grade = ?, CreatedAt = ? WHERE UserAssignmentID = ?";
+    try {
+        gradeAssignment = connection.prepareStatement(sql);
+        gradeAssignment.setString(1, grade);
+        gradeAssignment.setString(2, date);
+        gradeAssignment.setInt(3, assignmentID);
+        gradeAssignment.executeUpdate();
+        connection.close();
+        statement.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
     }
 }
