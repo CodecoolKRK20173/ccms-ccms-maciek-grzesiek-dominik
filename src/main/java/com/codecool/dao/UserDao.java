@@ -25,14 +25,15 @@ public class UserDao extends Dao{
     }
 
     private User createUser(ResultSet results) throws SQLException{
-        int userId = results.getInt("Id");
+        int userId = results.getInt("UserId");
         String email = results.getString("Email");
         String password = results.getString("Password");
         String name = results.getString("Name");
         String surname = results.getString("Surname");
         String phoneNumber = results.getString("PhoneNumber");
         int role = results.getInt("RoleId");
-        return new User(userId, email,password, name, surname, phoneNumber, role);
+        int classID = results.getInt("ClassId");
+        return new User(userId, email,password, name, surname, phoneNumber, role, classID);
     }
 
     public User getUser(String email, String password) {
@@ -44,7 +45,7 @@ public class UserDao extends Dao{
             ResultSet results = statement.executeQuery();
             List<User> users = getUsers();
             int indexDifference = 1;
-            int id = results.getInt("id") - indexDifference;
+            int id = results.getInt("UserId") - indexDifference;
             results.close();
             statement.close();
             connection.close();
