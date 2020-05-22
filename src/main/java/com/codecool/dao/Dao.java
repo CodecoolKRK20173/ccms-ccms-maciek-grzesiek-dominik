@@ -3,8 +3,6 @@ package com.codecool.dao;
 import com.codecool.models.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Dao {
     protected Connection connection;
@@ -31,31 +29,10 @@ public abstract class Dao {
             return;
         }
         String query = String.format("UPDATE %s SET %s = '%s' WHERE UserId = %s;", table, column, newValue, id);
-//                "UPDATE " + table + " SET " + column + " = " + newValue + " WHERE Id = " + id + ";";
 
         connect();
         try {
             statement.execute(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addUser(User user) {
-        connect();
-        PreparedStatement addUser;
-        String addString = "INSERT INTO Users (name, surname, email, password, PhoneNumber, RoleId) VALUES (?, ?, ?, ?, ?)";
-        try {
-            addUser = connection.prepareStatement(addString);
-            addUser.setString(1, user.getName());
-            addUser.setString(1, user.getSurname());
-            addUser.setString(2, user.getEmail());
-            addUser.setString(3, user.getPassword());
-            addUser.setString(4, user.getPhoneNumber());
-            addUser.setInt(5, user.getRole());
-            addUser.executeUpdate();
-            addUser.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,19 +50,6 @@ public abstract class Dao {
         return new User(userId, name, surname, password, email, phoneNumber, role, classId);
     }
 
-    public List<User> getUsersList() {
-        List<User> users = new ArrayList<>();
-        connect();
-        try {
-            ResultSet results = statement.executeQuery("SELECT * FROM Users;");
-            while (results.next()) {
-                users.add(createUser(results));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
     public void remove(String table, String id) {
         String query = String.format("DELETE FROM %s WHERE Id = %s;", table, id);
 
