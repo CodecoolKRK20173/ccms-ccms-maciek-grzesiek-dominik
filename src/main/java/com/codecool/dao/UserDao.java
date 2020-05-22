@@ -69,34 +69,16 @@ public class UserDao extends Dao {
         connect();
         List<List<String>> allUsersInfo = new ArrayList<>();
         try {
-            ResultSet results = statement.executeQuery("SELECT u.UserID AS User_id, u.email AS email, " +
-                    "u.password AS Password, u.name AS Name, u.surname AS Surname, c.ClassName AS Class_name, " +
-                    "u.phonenumber AS Phone_number " +
-                    "FROM Users u " +
-                    "JOIN Role r ON r.ID = u.roleID " +
-                    "LEFT JOIN UserClasses uc ON uc.UserID =  u.UserID " +
-                    "LEFT JOIN Classes c ON c.classID = uc.classID " +
-                    "WHERE r.role = " + role + ";");
-            while(results.next()) {
-                String id = results.getString("User_Id");
-                List<String> newUser = new ArrayList<>();
-                newUser.add(id);
-                for (String element : columns) {
-                    newUser.add(results.getString(element));
-                }
-                allUsersInfo.add(newUser);
-            }
+            ResultSet results = executeQuery(role, allUsersInfo, columns);
             results.close();
             statement.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         if (withGrades) {
             allUsersInfo.forEach(n -> addUserGrades(n.get(0), n));
         }
-
         List<String> headersList = new ArrayList<>();
         headersList.add("user_id");
         headersList.addAll(Arrays.asList(columns));
@@ -106,6 +88,24 @@ public class UserDao extends Dao {
         String[] headers = new String[headersList.size()];
         headersList.toArray(headers);
         System.out.println(FlipTable.of(headers, makeArrayFromList(allUsersInfo)));
+    }
+
+    private ResultSet executeQuery(String role, List<List<String>> allUsersInfo, String[] columns) throws SQLException {
+        ResultSet results = statement.executeQuery("SELECT u.UserID AS User_id, u.email AS email, " +
+                "u.password AS Password, u.name AS Name, u.surname AS Surname, c.ClassName AS Class_name, " +
+                "u.phonenumber AS Phone_number FROM Users u JOIN Role r ON r.ID = u.roleID " +
+                "LEFT JOIN UserClasses uc ON uc.UserID =  u.UserID LEFT JOIN Classes c ON c.classID = uc.classID " +
+                "WHERE r.role = " + role + ";");
+        while(results.next()) {
+            String id = results.getString("User_Id");
+            List<String> newUser = new ArrayList<>();
+            newUser.add(id);
+            for (String element : columns) {
+                newUser.add(results.getString(element));
+            }
+            allUsersInfo.add(newUser);
+        }
+        return results;
     }
 
     private String[][] makeArrayFromList(List<List<String>> userData) {
