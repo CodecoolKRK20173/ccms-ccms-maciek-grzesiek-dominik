@@ -71,11 +71,11 @@ public class MenuHandler {
                 employeePanel();
                 break;
             case 2:
-                initializeMentorMenu(user);
+                initializeMentorMenu();
                 mentorPanel();
                 break;
             case 3:
-                initializeStudentMenu(user);
+                initializeStudentMenu();
                 studentPanel();
         }
     }
@@ -116,7 +116,7 @@ public class MenuHandler {
         }
     }
 
-    private void initializeMentorMenu(User user) {
+    private void initializeMentorMenu() {
         mentorMenu = new HashMap<>();
         mentorMenu.put(1, userDao::printStudentsListAsMentor);
         mentorMenu.put(2, this::addAssignment);
@@ -136,7 +136,7 @@ public class MenuHandler {
         }
     }
 
-    private void initializeStudentMenu(User user) {
+    private void initializeStudentMenu() {
         studentMenu = new HashMap<>();
         studentMenu.put(1, this::submitAssignmentByUser);
         studentMenu.put(2, this::printAssignmentByUser);

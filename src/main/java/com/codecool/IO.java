@@ -29,16 +29,6 @@ public class IO {
         return userInt;
     }
 
-//    DO WYWALENIA?
-//    public boolean isNumber(String input) {
-//        return !input.equals("") && input.matches("^[0-9]*$");
-//    }
-//
-//    public void gatherEmptyInput(String message) {
-//        System.out.println(message);
-//        scan.next();
-//    }
-
     public String gatherInput(String message) {
         System.out.println(message);
         boolean validInput = true;

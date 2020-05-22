@@ -1,9 +1,7 @@
 package com.codecool.dao;
 
 import com.codecool.models.Classes;
-import com.codecool.models.Grades;
 import com.codecool.models.User;
-import com.jakewharton.fliptables.FlipTableConverters;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,20 +34,6 @@ public class MentorDao extends Dao {
         int roleId = results.getInt("RoleId");
         int classID = results.getInt("ClassId");
         return new User(id, email, password, name, surname, phoneNumber, roleId, classID);
-    }
-
-    public void getStudentsList() {
-        String sql = "SELECT Name, Surname, Email, ClassName FROM Users INNER JOIN Classes on Users.ClassId=Classes.ClassId";
-        connect();
-        try {
-            ResultSet rs = statement.executeQuery(sql);
-            System.out.println(FlipTableConverters.fromResultSet(rs));
-            rs.close();
-            statement.close();
-            connection.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     public void addAssignment(Classes classes) {

@@ -7,17 +7,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class StudentDao extends Dao {
-
-    //        studentMenu.put(1, user::submitAssignment);
-    //        studentMenu.put(2, user::showGrades);
-
-    public StudentDao() {
-
-    }
 
     public void submitAssignment(int studentID, String assignmentName, String filePath) {
         connect();
@@ -35,8 +27,6 @@ public class StudentDao extends Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void printStudentGrades(int studentID) {
@@ -69,7 +59,6 @@ public class StudentDao extends Dao {
             e.printStackTrace();
         }
         printGradesList(grades);
-
     }
 
     private void printGradesList(List<List<String>> gradesList) {
@@ -81,8 +70,5 @@ public class StudentDao extends Dao {
             grades[i] = gradesList.get(0).toArray(new String[gradeSize]);
         }
         System.out.println(FlipTable.of(headers, grades));
-
-
     }
-
 }

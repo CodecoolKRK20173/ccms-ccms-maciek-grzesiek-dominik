@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 public class UserDao extends Dao {
 
@@ -66,11 +65,6 @@ public class UserDao extends Dao {
         printUserInfo(false, "\"Mentor\"", "Name", "Surname", "Email", "Phone_number");
     }
 
-    public void printEmployeeList() {
-        printUserInfo(false, "\"Employee\"", "Name", "Surname", "Email", "Phone_number");
-    }
-
-
     private void printUserInfo(Boolean withGrades, String role, String... columns) {
         connect();
         List<List<String>> allUsersInfo = new ArrayList<>();
@@ -98,8 +92,6 @@ public class UserDao extends Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
 
         if (withGrades) {
             allUsersInfo.forEach(n -> addUserGrades(n.get(0), n));
@@ -146,7 +138,6 @@ public class UserDao extends Dao {
                 System.out.println(grade);
                 newUser.set(newUser.size()-1, grade);
                 if (grade.toLowerCase().trim().equals("not passed")) break;
-
             }
             grades.close();
             statement.close();
@@ -154,9 +145,5 @@ public class UserDao extends Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 }
