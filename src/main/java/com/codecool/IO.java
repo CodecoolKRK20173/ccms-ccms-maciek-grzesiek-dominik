@@ -1,5 +1,7 @@
 package com.codecool;
 
+import java.io.Console;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class IO {
@@ -44,5 +46,11 @@ public class IO {
             }
         } while (!validInput);
         return userInput;
+    }
+
+    public String gatherPassword() {
+        Console console = System.console();
+        char[] password = console.readPassword("Enter password: ");
+        return Arrays.toString(password);
     }
 }
