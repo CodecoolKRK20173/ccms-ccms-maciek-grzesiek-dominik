@@ -23,7 +23,6 @@ public class UI {
     }
 
     public void displayAdminMenu(){
-        clearScreen();
         Map<Integer, String> adminMenu = makeAdminChoiceMap();
         System.out.println("Admin MENU: ");
         adminMenu.forEach((k,v) -> System.out.println(k+". "+v));
