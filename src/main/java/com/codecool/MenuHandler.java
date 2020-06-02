@@ -114,6 +114,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayEmployeeMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 2);
+            ui.clearScreen();
             employeeMenu.get(userChoice).run();
         }
     }
@@ -134,6 +135,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayMentorMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 8);
+            ui.clearScreen();
             mentorMenu.get(userChoice).run();
         }
     }
@@ -149,6 +151,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayStudentMenu();
             int userChoice = io.gatherIntInput("\nEnter a number:", 1, 3);
+            ui.clearScreen();
             studentMenu.get(userChoice).run();
         }
     }
@@ -189,6 +192,7 @@ public class MenuHandler {
     }
 
     private void removeMentor () {
+        userDao.printMentorsList();
         adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
     }
 

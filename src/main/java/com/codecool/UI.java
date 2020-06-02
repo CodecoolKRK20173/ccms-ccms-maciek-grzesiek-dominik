@@ -29,28 +29,24 @@ public class UI {
     }
 
     public void displayEmployeeMenu(){
-        clearScreen();
         Map<Integer, String> employeeMenu = makeEmployeeChoiceMap();
         System.out.println("Employee MENU: ");
         employeeMenu.forEach((k,v) -> System.out.println(k+". "+v));
     }
 
     public void displayMentorMenu(){
-        clearScreen();
         Map<Integer, String> mentorMenu = makeMentorChoiceMap();
         System.out.println("Mentor MENU: ");
         mentorMenu.forEach((k,v) -> System.out.println(k+". "+v));
     }
 
     public void displayStudentMenu(){
-        clearScreen();
         Map<Integer, String> studentMenu = makeStudentChoiceMap();
         System.out.println("Student MENU: ");
         studentMenu.forEach((k,v) -> System.out.println(k+". "+v));
     }
 
     private Map<Integer, String> makeStudentChoiceMap(){
-        clearScreen();
         Map<Integer, String> studentChoiceMap = new HashMap<>();
         studentChoiceMap.put(1, "Submit an assignment");
         studentChoiceMap.put(2, "Show my grades");
