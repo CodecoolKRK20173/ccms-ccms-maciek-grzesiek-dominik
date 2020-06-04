@@ -22,6 +22,11 @@ public class UI {
         }
     }
 
+    public void displayUserMenu(Map<Integer, String> choiceMap) {
+        System.out.println("MENU: ");
+        choiceMap.forEach((k,v) -> System.out.println(k+". "+v));
+    }
+
     public void displayAdminMenu(){
         clearScreen();
         Map<Integer, String> adminMenu = makeAdminChoiceMap();
