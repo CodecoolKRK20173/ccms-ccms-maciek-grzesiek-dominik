@@ -7,6 +7,7 @@ import com.codecool.models.User;
 import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class MenuHandler {
     private final UI ui;
@@ -58,9 +59,7 @@ public class MenuHandler {
 
     private void login() {
         ui.clearScreen();
-        String email = io.gatherInput("Enter Email: ");
-        String password = io.gatherPassword();
-        this.user = userDao.getUser(email, password);
+        checkIfLoginSuccessful();
         isLogin = true;
         switch (user.getRole()) {
             case 1:
@@ -78,6 +77,20 @@ public class MenuHandler {
             case 3:
                 initializeStudentMenu();
                 studentPanel();
+        }
+    }
+
+    private void checkIfLoginSuccessful() {
+        boolean loginSuccessful = false;
+        while (!loginSuccessful) {
+            String email = io.gatherInput("Enter Email: ");
+            String password = io.gatherPassword();
+            try{
+            this.user = userDao.getUser(email, password);
+            loginSuccessful = true;
+            }catch (NoSuchElementException e){
+                io.print(e.getMessage());
+            }
         }
     }
 
