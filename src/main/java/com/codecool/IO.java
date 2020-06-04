@@ -1,7 +1,6 @@
 package com.codecool;
 
 import java.io.Console;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class IO {
@@ -10,6 +9,10 @@ public class IO {
     public IO() {
         scan = new Scanner(System.in);
         scan.useDelimiter(System.lineSeparator());
+    }
+
+    public void print(String s) {
+        System.out.println(s);
     }
 
     public int gatherIntInput(String title, int minRange, int maxRange) {
@@ -34,7 +37,7 @@ public class IO {
     public String gatherInput(String message) {
         System.out.println(message);
         boolean validInput = true;
-        String userInput = "";
+        String userInput;
         do {
             if (!validInput) {
                 System.out.println("Your input must contain at least one character. Enter again: ");
