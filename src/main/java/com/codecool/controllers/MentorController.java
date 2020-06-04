@@ -17,8 +17,8 @@ public class MentorController extends Controller {
 //        this.actionMenu.put(4, user::checkAttendance);
 //        this.actionMenu.put(5, user::addStudentToClass);
 //        this.actionMenu.put(6, user::removeStudentFromClass);
-        this.actionMenu.put(7, this::editStudentData);
-        this.actionMenu.put(8, this::logout);
+        this.actionMenu.put(4, this::editStudentData);
+        this.actionMenu.put(5, this::logout);
     }
 
     @Override
@@ -57,5 +57,5 @@ public class MentorController extends Controller {
         String newEmail = io.gatherInput("Enter new student's email: ");
         String newPhoneNumber = io.gatherInput("Enter new student's phone number: ");
         mentorDao.editStudentData(studentId, newName, newSurname, newEmail, newPhoneNumber);
-        }
+    }
 }

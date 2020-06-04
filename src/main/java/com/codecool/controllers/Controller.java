@@ -17,7 +17,7 @@ public abstract class Controller implements Controllable {
     GradesDao gradesDao;
     Map<Integer, String> choiceMap;
     Map<Integer, Runnable> actionMenu;
-    private boolean isLogin;
+    private boolean isLogin = true;
 
     Controller() {
         this.ui = new UI();
