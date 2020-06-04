@@ -44,6 +44,7 @@ public class AdminController extends Controller {
     }
 
     private void removeMentor () {
+        userDao.printMentorsList();
         adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
     }
 
