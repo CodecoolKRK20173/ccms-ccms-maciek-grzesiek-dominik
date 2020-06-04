@@ -67,6 +67,25 @@ public class MentorDao extends Dao {
         statement.close();
     } catch (SQLException e) {
         e.printStackTrace();
+        }
     }
+
+    public void editStudentData(int studentId, String newName, String newSurname, String newEmail, String newPhoneNumber) {
+        connect();
+        PreparedStatement editStudentData;
+        String sql = "UPDATE Users SET Name = ?, Surname = ?, Email = ?, PhoneNumber = ? WHERE UserId = ?";
+        try {
+           editStudentData = connection.prepareStatement(sql);
+           editStudentData.setString(1, newName);
+           editStudentData.setString(2, newSurname);
+           editStudentData.setString(3, newEmail);
+           editStudentData.setString(4, newPhoneNumber);
+           editStudentData.setInt(5, studentId);
+           editStudentData.executeUpdate();
+           connection.close();
+           statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

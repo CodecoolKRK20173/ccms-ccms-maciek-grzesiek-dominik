@@ -17,7 +17,7 @@ public class MentorController extends Controller {
 //        this.actionMenu.put(4, user::checkAttendance);
 //        this.actionMenu.put(5, user::addStudentToClass);
 //        this.actionMenu.put(6, user::removeStudentFromClass);
-//        this.actionMenu.put(7, user::editStudentData);
+        this.actionMenu.put(7, this::editStudentData);
         this.actionMenu.put(8, this::logout);
     }
 
@@ -43,9 +43,19 @@ public class MentorController extends Controller {
     private void gradeAssignment() {
         System.out.println("You are changing student's grade");
         gradesDao.showAllGradesByUser();
-        int assignmentId = io.gatherIntInput("Enter assignment ID to grade it",1,666); // POPRAWIC max range
+        int assignmentId = io.gatherIntInput("Enter assignment ID to grade it",1,666); // TODO@ POPRAWIC max range
         String grade = io.gatherInput("Is assignment passed?:" );
         mentorDao.gradeAssignment(assignmentId, grade);
     }
 
+    private void editStudentData() {
+        System.out.println("You are changing student's data");
+        userDao.printStudentsListAsMentor();
+        int studentId = io.gatherIntInput("Choose student's ID to edit", 1, 666); // TODO max range
+        String newName = io.gatherInput("Enter new student's name: ");
+        String newSurname = io.gatherInput("Enter new student's surname: ");
+        String newEmail = io.gatherInput("Enter new student's email: ");
+        String newPhoneNumber = io.gatherInput("Enter new student's phone number: ");
+        mentorDao.editStudentData(studentId, newName, newSurname, newEmail, newPhoneNumber);
+        }
 }
