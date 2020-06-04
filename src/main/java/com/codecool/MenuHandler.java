@@ -4,6 +4,7 @@ import com.codecool.dao.*;
 import com.codecool.models.Classes;
 import com.codecool.models.User;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public class MenuHandler {
     private void login() {
         ui.clearScreen();
         String email = io.gatherInput("Enter Email: ");
-        String password = io.gatherInput("Enter Password: ");
+        String password = io.gatherPassword();
         this.user = userDao.getUser(email, password);
         isLogin = true;
         switch (user.getRole()) {
@@ -98,6 +99,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayAdminMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 6);
+            ui.clearScreen();
             adminMenu.get(userChoice).run();
         }
     }
@@ -112,6 +114,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayEmployeeMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 2);
+            ui.clearScreen();
             employeeMenu.get(userChoice).run();
         }
     }
@@ -132,6 +135,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayMentorMenu();
             int userChoice = io.gatherIntInput("\nEnter a number: ", 1, 8);
+            ui.clearScreen();
             mentorMenu.get(userChoice).run();
         }
     }
@@ -147,6 +151,7 @@ public class MenuHandler {
         while (isLogin) {
             ui.displayStudentMenu();
             int userChoice = io.gatherIntInput("\nEnter a number:", 1, 3);
+            ui.clearScreen();
             studentMenu.get(userChoice).run();
         }
     }
@@ -187,6 +192,7 @@ public class MenuHandler {
     }
 
     private void removeMentor () {
+        userDao.printMentorsList();
         adminDao.remove("Users", io.gatherInput("Give id of mentor that you want to remove"));
     }
 
