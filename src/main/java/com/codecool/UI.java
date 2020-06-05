@@ -1,6 +1,5 @@
 package com.codecool;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class UI {

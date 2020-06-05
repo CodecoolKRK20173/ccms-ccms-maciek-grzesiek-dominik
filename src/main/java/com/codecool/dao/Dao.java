@@ -46,8 +46,7 @@ public abstract class Dao {
         String email = results.getString("Email");
         String phoneNumber = results.getString("PhoneNumber");
         int role = results.getInt("RoleId");
-        int classId = results.getInt("ClassId");
-        return new User(userId, name, surname, password, email, phoneNumber, role, classId);
+        return new User(userId, name, surname, password, email, phoneNumber, role);
     }
 
     public void remove(String table, String id) {

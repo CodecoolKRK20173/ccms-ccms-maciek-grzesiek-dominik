@@ -32,8 +32,7 @@ public class MentorDao extends Dao {
         String surname = results.getString("Surname");
         String phoneNumber = results.getString("PhoneNumber");
         int roleId = results.getInt("RoleId");
-        int classID = results.getInt("ClassId");
-        return new User(id, email, password, name, surname, phoneNumber, roleId, classID);
+        return new User(id, email, password, name, surname, phoneNumber, roleId);
     }
 
     public void addAssignment(Classes classes) {
@@ -84,6 +83,22 @@ public class MentorDao extends Dao {
            editStudentData.executeUpdate();
            connection.close();
            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudentToClass(int studentId, int newClass) {
+        connect();
+        PreparedStatement addStudentToClass;
+        String sql = "INSERT INTO UserClasses (ClassId, UserId) VALUES (?, ?)";
+        try {
+            addStudentToClass = connection.prepareStatement(sql);
+            addStudentToClass.setInt(1, newClass);
+            addStudentToClass.setInt(2, studentId);
+            addStudentToClass.executeUpdate();
+            connection.close();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

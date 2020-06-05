@@ -8,29 +8,19 @@ public class User {
     private String email;
     private String phoneNumber;
     private int role;
-    private int classId;
 
-
- 
-
-    public User(int id, String email, String password, String name, String surname, String phoneNumber, int role, int classId) {
+    public User (int id, String email, String password, String name, String surname, String phoneNumber, int role){
         this.id = id;
+        this.email = email;
+        this.password = password;
         this.name = name;
         this.surname = surname;
-        this.password = password;
-        this.email = email;
         this.phoneNumber = phoneNumber;
         this.role = role;
-        this.classId = classId;
     }
 
     public User (String email, String password, String name, String surname, String phoneNumber, int role){
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
+        this(0, email, password, name, surname, phoneNumber, role);
     }
 
     public String getName() {
@@ -69,10 +59,5 @@ public class User {
 
     public void setSurname(String surname) { this.surname = surname; }
 
-
     public String getSurname() { return surname; }
-
-    public void setClassId(int classId) { this.classId = classId; }
-
-    public int getClassId() { return classId; }
 }

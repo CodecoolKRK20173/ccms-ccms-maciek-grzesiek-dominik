@@ -57,7 +57,7 @@ public class UserDao extends Dao {
     }
 
     public void printStudentsListAsMentor() {
-        printUserInfo(true,  "\"Student\"", "Name", "Surname", "Email",
+        printUserInfo(false,  "\"Student\"", "Name", "Surname", "Email",
                 "Phone_number", "Class_name");
     }
 
@@ -101,7 +101,8 @@ public class UserDao extends Dao {
             List<String> newUser = new ArrayList<>();
             newUser.add(id);
             for (String element : columns) {
-                newUser.add(results.getString(element));
+                String res = results.getString(element);
+                newUser.add(res != null ? res : "null");
             }
             allUsersInfo.add(newUser);
         }
